@@ -6,6 +6,8 @@ class AuthController extends GetxController {
   final SupabaseClient supabase = Supabase.instance.client;
 
   var isLoading = false.obs;
+  var lastLoginEmail = ''.obs;
+  var lastLoginPassword = ''.obs;
 
   @override
   void onInit() {
@@ -54,6 +56,8 @@ class AuthController extends GetxController {
       );
 
       if (response.user != null) {
+        lastLoginEmail.value = email;
+        lastLoginPassword.value = password;
         Get.snackbar("Success", "Login successful");
         Get.offAllNamed(Routes.HOME);
       }

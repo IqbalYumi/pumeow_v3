@@ -7,6 +7,8 @@ import '../views/product_detail_view.dart';
 import '../views/cart_view.dart';
 import '../bindings/initial_binding.dart';
 import '../views/map_view.dart';
+import '../views/profile_view.dart';
+import '../views/checkout_view.dart';
 
 part 'app_routes.dart';
 
@@ -40,5 +42,15 @@ class AppPages {
       binding: InitialBinding(),
     ),
     GetPage(name: Routes.MAP, page: () => MapView(), binding: InitialBinding()),
+    GetPage(
+      name: Routes.PROFILE,
+      page: () => ProfileView(),
+      binding: InitialBinding(),
+    ),
+    GetPage(
+      name: Routes.CHECKOUT,
+      page: () => CheckoutView(),
+      binding: InitialBinding(),
+    ),
   ];
 }

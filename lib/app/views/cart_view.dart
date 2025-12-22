@@ -78,9 +78,7 @@ class CartView extends StatelessWidget {
                 );
                 return;
               }
-
-              // ✅ NAVIGASI KE MAP VIEW
-              Get.toNamed(Routes.MAP);
+              Get.toNamed(Routes.CHECKOUT);
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.teal,
@@ -89,7 +87,7 @@ class CartView extends StatelessWidget {
               ),
             ),
             child: const Text(
-              'Pilih Lokasi Pengiriman',
+              'Beli',
               style: TextStyle(fontSize: 16),
             ),
           ),
@@ -98,3 +96,5 @@ class CartView extends StatelessWidget {
     );
   }
 }
+
+

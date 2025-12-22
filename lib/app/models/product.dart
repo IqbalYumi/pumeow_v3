@@ -4,13 +4,21 @@ class Product {
   final String variant;
   final double price;
   final String description;
+  final String imageAsset;
+  final String location;
+  final double rating;
+  final bool isAvailable;
 
-  Product({
+  const Product({
     required this.id,
     required this.name,
     required this.variant,
     required this.price,
     required this.description,
+    required this.imageAsset,
+    required this.location,
+    this.rating = 4.5,
+    this.isAvailable = true,
   });
 
   Map<String, dynamic> toJson() => {
@@ -19,6 +27,10 @@ class Product {
     "variant": variant,
     "price": price,
     "description": description,
+    "imageAsset": imageAsset,
+    "location": location,
+    "rating": rating,
+    "isAvailable": isAvailable,
   };
 
   @override
