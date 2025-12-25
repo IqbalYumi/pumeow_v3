@@ -9,6 +9,9 @@ import '../bindings/initial_binding.dart';
 import '../views/map_view.dart';
 import '../views/profile_view.dart';
 import '../views/checkout_view.dart';
+import '../views/payment_view.dart';
+import '../views/payment_simulation_view.dart';
+import '../views/payment_success_view.dart';
 
 part 'app_routes.dart';
 
@@ -50,6 +53,21 @@ class AppPages {
     GetPage(
       name: Routes.CHECKOUT,
       page: () => CheckoutView(),
+      binding: InitialBinding(),
+    ),
+    GetPage(
+      name: Routes.PAYMENT_METHOD,
+      page: () => PaymentView(),
+      binding: InitialBinding(),
+    ),
+    GetPage(
+      name: Routes.PAYMENT_SIMULATION,
+      page: () => PaymentSimulationView(),
+      binding: InitialBinding(),
+    ),
+    GetPage(
+      name: Routes.PAYMENT_SUCCESS,
+      page: () => PaymentSuccessView(),
       binding: InitialBinding(),
     ),
   ];

@@ -4,6 +4,7 @@ import '../controllers/product_controller.dart';
 import '../controllers/cart_controller.dart';
 import '../models/product.dart';
 import '../routes/app_pages.dart';
+import '../services/notification_service.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -139,24 +140,45 @@ class _HomeViewState extends State<HomeView> {
                   ),
                 ),
                 const SizedBox(width: 12),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Pumeow Pudding',
-                      style: theme.textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.w800,
-                        color: const Color(0xff111827),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Pumeow Pudding',
+                        style: theme.textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.w800,
+                          color: const Color(0xff111827),
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      'Dessert lembut untuk temani harimu',
-                      style: theme.textTheme.bodyMedium?.copyWith(
-                        color: Colors.grey[600],
+                      const SizedBox(height: 4),
+                      Text(
+                        'Dessert lembut untuk temani harimu',
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: Colors.grey[600],
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Flexible(
+                  child: TextButton.icon(
+                    onPressed: () async {
+                      await NotificationService.showSampleNotification();
+                      Get.snackbar(
+                          'Notifikasi', 'Contoh notifikasi lokal dikirim.');
+                    },
+                    icon: const Icon(Icons.notifications_active_outlined),
+                    label: const Text('Tes Notifikasi'),
+                    style: TextButton.styleFrom(
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      visualDensity:
+                          const VisualDensity(horizontal: -2, vertical: -2),
                     ),
-                  ],
+                  ),
                 ),
               ],
             ),

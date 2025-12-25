@@ -22,16 +22,43 @@ class Product {
   });
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "variant": variant,
-    "price": price,
-    "description": description,
-    "imageAsset": imageAsset,
-    "location": location,
-    "rating": rating,
-    "isAvailable": isAvailable,
-  };
+        "id": id,
+        "name": name,
+        "variant": variant,
+        "price": price,
+        "description": description,
+        "imageAsset": imageAsset,
+        "location": location,
+        "rating": rating,
+        "isAvailable": isAvailable,
+      };
+
+  factory Product.fromMap(Map<String, dynamic> map) {
+    return Product(
+      id: _asInt(map['id']),
+      name: (map['name'] ?? '') as String,
+      variant: (map['variant'] ?? '') as String,
+      price: _asDouble(map['price']),
+      description: (map['description'] ?? '') as String,
+      imageAsset: (map['image_asset'] ?? map['imageAsset'] ?? '') as String,
+      location: (map['location'] ?? '') as String,
+      rating: _asDouble(map['rating'] ?? 4.5),
+      isAvailable: (map['is_available'] ?? map['isAvailable'] ?? true) as bool,
+    );
+  }
+
+  static double _asDouble(dynamic value) {
+    if (value is int) return value.toDouble();
+    if (value is double) return value;
+    if (value is String) return double.tryParse(value) ?? 0;
+    return 0;
+  }
+
+  static int _asInt(dynamic value) {
+    if (value is int) return value;
+    if (value is String) return int.tryParse(value) ?? 0;
+    return 0;
+  }
 
   @override
   bool operator ==(Object other) =>

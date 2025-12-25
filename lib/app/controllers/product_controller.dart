@@ -2,9 +2,13 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
 import '../models/product.dart';
+import '../services/supabase_service.dart';
 
 class ProductController extends GetxController {
+  final SupabaseService _supabaseService = SupabaseService();
+
   var productList = <Product>[].obs;
+  var isLoading = false.obs;
 
   @override
   void onInit() {
@@ -13,9 +17,24 @@ class ProductController extends GetxController {
   }
 
   Future<void> fetchProducts() async {
+    isLoading.value = true;
     final box = Hive.isBoxOpen('products')
         ? Hive.box<Product>('products')
         : await Hive.openBox<Product>('products');
+
+    try {
+      final remote = await _supabaseService.fetchProducts();
+      if (remote.isNotEmpty) {
+        await box.clear();
+        await box.addAll(remote);
+        productList.assignAll(remote);
+        return;
+      }
+    } catch (_) {
+      // ignore and fallback to local data
+    } finally {
+      isLoading.value = false;
+    }
 
     if (box.isEmpty) {
       await box.addAll(_defaultProducts);
